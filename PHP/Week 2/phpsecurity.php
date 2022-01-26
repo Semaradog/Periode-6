@@ -13,11 +13,7 @@ if (!$conn) {
 if (!empty($_POST["postdata"])) {
   $sql = "INSERT INTO test (postdata) VALUES ('" . mysqli_real_escape_string($conn,$_POST["postdata"]) . "')";
   echo $sql;
-  //id: 5 - postdata: 105; DROP TABLE postdata
-// id: 6 - postdata: 105; DROP TABLE test
-// id: 7 - postdata: " AND DROP TABLE test
-// id: 8 - postdata: " AND DROP TABLE test
-// id: 9 - postdata: DROP TABLE test
+  
 
   if (!mysqli_query($conn, $sql)) {
     die("Error: " . $sql . "<br>" . mysqli_error($conn));
@@ -57,7 +53,7 @@ if (!empty($_GET["bericht"])) {
   }
   ?>
   <h3>Voeg data toe aan de database:</h3>
-  <form action="security.php" method="POST">
+  <form action="phpsecurity.php" method="POST">
     <input name="postdata" type="text" placeholder="postdata">
     <input type="submit" value="toevoegen">
   </form>
@@ -70,7 +66,7 @@ if (!empty($_GET["bericht"])) {
   // <script>alert('XSS');</script>
   include 'security.txt'; ?>
   <h3>Voer een bericht in om toe te voegen aan de lijst hierboven:</h3>
-  <form action="security.php" method="GET">
+  <form action="phpsecurity.php" method="GET">
     <input name="bericht" type="text" placeholder="bericht">
     <input type="submit" value="verstuur bericht">
   </form>
@@ -90,7 +86,7 @@ if (!empty($_GET["bericht"])) {
   }
   ?>
   <h3>Voer een wachtwoord in om mee in te loggen:</h3>
-  <form action="security.php" method="GET">
+  <form action="phpsecurity.php" method="GET">
     <input name="wachtwoord" type="password" placeholder="password" pattern=".{8,}" title="Eight or more characters">
     <input type="submit" value="inloggen">
   </form>
@@ -105,7 +101,7 @@ if (!empty($_GET["bericht"])) {
     function bruteForce() {
       // loop door de array heen met mogelijke wachtwoorden en check of er een overeenkomst is
       currentPassword = passwords[counter];
-      getText("security.php?wachtwoord="+currentPassword); 
+      getText("phpsecurity.php?wachtwoord="+currentPassword); 
       counter++;
       if (counter==passwords.length) 
       {
