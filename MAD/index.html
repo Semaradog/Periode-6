@@ -5,13 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="bootstrap/js/bootstrap.min.js"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/popper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
     <link rel="manifest" href="./manifest.webmanifest"  crossorigin="use-credentials">
     <title>WEBCAM</title>
 </head>
 <body>
     <!-- Container -->
-    <div class="container bg-light border border-5 border-dark shadow my-5" style="height: 90%;">
+    <div class="container bg-light border border-5 border-dark shadow my-5">
 
         <!-- First Row (Header) -->
         <div class="row col-sm bg-white border-bottom shadow p-2">
@@ -24,7 +27,7 @@
             <video id="video" autoplay class="embed-responsive embed-responsive-1by1" allowfullscreen>
                 <canvas id="canvas" class="embed-responsive-item"></canvas>
             </video>
-            <script src="app.js"></script>
+           
 
         </div>
 
@@ -34,10 +37,84 @@
         </div>
     </div>
 
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>
 
-    <video id="video" autoplay>
-        <canvas id="canvas"></canvas>
-    </video>
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <fieldset>
+                <legend>Kies een filter</legend>
+                <div>
+                  <input type="checkbox" id="gray" name="gray"  onclick="setfilter()">
+                  <label for="gray">Gray</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="blur" name="blur" onclick="setfilter()">
+                  <label for="blur">Blur</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="inverse" name="inverse" onclick="setfilter()">
+                    <label for="inverse">Inverse</label>
+                  </div>
+              </fieldset>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+<script>
+function setfilter()
+{
+    if (document.getElementById("gray").checked)
+    {
+        document.getElementById("video").classList.add("gray");
+    }
+    else{
+        document.getElementById("video").classList.remove("gray");
+    }
+    if (document.getElementById("blur").checked)
+    {
+        document.getElementById("video").classList.add("blur");
+    }
+    else{
+        document.getElementById("video").classList.remove("blur");
+    }
+     if (document.getElementById("inverse").checked)
+    {
+        document.getElementById("video").classList.add("inverse");
+    }
+    else{
+        document.getElementById("video").classList.remove("inverse");
+    }
+}
+
+</script>
+<style>
+    .gray{
+        filter: grayscale(1);
+    }
+    .blur{
+        filter: blur(10px);
+    }
+    .inverse{
+        filter: invert(1);
+    }
+</style>
 
 
 </body>
